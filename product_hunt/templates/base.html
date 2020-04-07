@@ -12,11 +12,10 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/album/">
 
     <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- Favicons -->
-<meta name="theme-color" content="#563d7c">
-
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <!-- Favicons -->
+    <meta name="theme-color" content="#563d7c">
+    <link rel="stylesheet" href="{% static 'open-iconic/font/css/open-iconic-bootstrap.css' %}">
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -34,7 +33,7 @@
       }
 
       /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text], input[type=password], textarea, input[type=file] {
   width: 100%;
   padding: 10px;
   margin: 5px 0 10px 0;
@@ -103,17 +102,23 @@ button:hover {
   text-align: center;
   margin: 0;
 }
+b{
+font-weight: 600;
+}
+
     </style>
     <!-- Custom styles for this template -->
     <link href="album.css" rel="stylesheet">
     <link href="signup.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-          <a class="navbar-brand" href="#">
-                <img src="{% static 'logo.svg' %}" width="35" height="35" class="d-inline-block align-top" />
+          <a class="navbar-brand" href="{% url 'home' %}" style="color: rgba(110, 103, 103, 0.9); font-weight: 900; font-family: cursive; font-size: 26px;">
+<!--                <img src="{% static 'logo.svg' %}" width="35" height="35" class="d-inline-block align-top" />-->
+              <span class="oi oi-magnifying-glass" style="font-size: 35px; color: #4CAF50;"></span>
           Product Hunt</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -121,20 +126,23 @@ button:hover {
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create' %}"><i class="fa fa-plus-square" style="font-size:18px;color:#4CAF50;"></i> Create</a>
+                </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}">Logout</a>
+                      <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}"><span class="oi oi-account-logout" style="color: #4CAF50;"></span> Logout</a>
                       <form id="logout" method="POST" action="{% url 'logout' %}">
                           {% csrf_token %}
                         <input type="hidden">
                       </form>
                   </li>
-                {% else %}
 
+                {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
-                  </li>
-                  <li class="nav-item">
                     <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>&nbsp&nbsp
+                <li class="nav-item" >
+                    <a class="nav-link btn btn-success text-light" href="{% url 'signup' %}">Sign Up</a>
                   </li>
                 {% endif %}
             </ul>

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error %}
+{{ error }}
+{% endif %}
+<div class="container">
+    <div class="offset-md-3 col-md-6">
+        <form method='POST' action="{% url 'create' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% load static %}
+            <h1>Create Product</h1>
+            <p>Please create your product</p>
+            <hr>
+              <div class="imgcontainer">
+                <img src="{% static 'add-product.png' %}" alt="login-logo" class="avatar" width="100" height="100">
+              </div>
+                <label for="title"><b>Title</b></label>
+                <input type="text" placeholder="Enter Title" name="title" required>
+
+                <label for="body"><b>Body</b></label>
+                <textarea placeholder="Enter Body" name="body" rows="3" cols="50" required></textarea>
+
+                <label for="url"><b>Url</b></label>
+                <input type="text" placeholder="Enter Url" name="url" required>
+
+                <label for="icon"><b>Icon</b></label>
+                <input type="file" placeholder="Enter Icon" name="icon" required>
+
+                <label for="image"><b>Image</b></label>
+                <input type="file" placeholder="Enter Image" name="image" required>
+
+                <button type="submit">Add Product</button>
+
+        </form>
+    </div>
+</div>
+{% endblock %}
